@@ -31,7 +31,7 @@
 using namespace std;
 
 bool isBalanced(string s){
-    vector<char> openedBrackets;                                // it will conta
+    vector<char> openedBrackets;                                
 
     for(int i=0; i<s.length(); i++){
         int bracket = s[i];
@@ -39,15 +39,15 @@ bool isBalanced(string s){
         if(bracket=='(' || bracket=='{' || bracket=='['){
             openedBrackets.push_back(s[i]);
         }
-        else{
-            if(openedBrackets.empty()){
+        else{                                  // if the bracket is either ),},]
+            if(openedBrackets.empty()){        // since the current bracket is ) | } | ] and if the openedBrackets array is empty means there is no opening bracket present, hence the string is not balanced              
                 return false;
             }
 
             char lastOpenedBracket = openedBrackets[openedBrackets.size()-1];
 
             if(bracket==')'){
-                if(lastOpenedBracket=='('){
+                if(lastOpenedBracket=='('){     // if last opened bracket is same as this current closing bracket means it is correct, hence remove it and then look for its previously opened bracket
                     openedBrackets.pop_back();
                 }
                 else{
@@ -76,8 +76,8 @@ bool isBalanced(string s){
         }
     }
 
-    if(openedBrackets.empty()){
-        return true;
+    if(openedBrackets.empty()){         // if there is still any opned bracket present means the its corresponding closing bracket is not found, hence the string is not balanced
+        return true;    
     }
     else{
         return false;
